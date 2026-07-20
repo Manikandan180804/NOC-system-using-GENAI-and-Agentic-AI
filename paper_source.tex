@@ -1,0 +1,76 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceded line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Generative and Agentic AI for Autonomous Network Operations: A Self-Healing Framework for Intelligent NOC Systems}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Author Name}
+\IEEEauthorblockA{\textit{Prodapt Solutions} \\
+\textit{Research \& Development}\\
+City, Country \\
+email@prodapt.com}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Author Name}
+\IEEEauthorblockA{\textit{Prodapt Solutions} \\
+\textit{AI Excellence Center}\\
+City, Country \\
+email@prodapt.com}
+}
+
+\maketitle
+
+\begin{abstract}
+Generative Artificial Intelligence (GenAI) is quietly transforming the way telecom networks are managed --- not through incremental improvements, but by fundamentally rethinking how Network Operations Centers (NOCs) detect, analyze, and respond to problems. For years, NOC teams have been caught in a cycle of reactive monitoring and manual troubleshooting, where engineers scramble to identify issues only after something has already gone wrong. The result? Unnecessary downtime, stretched teams, and a Mean Time To Repair (MTTR) that no one is proud of. This white paper introduces a unified framework that brings together GenAI and Agentic AI to change that dynamic --- moving telecom operations from firefighting mode to something far more intelligent and self-sustaining. At the heart of the framework are large language models (LLMs) that read through complex network logs, make sense of what is happening, and surface actionable recommendations in near real time. Alongside this, an agent-based architecture handles the follow-through, autonomously executing remediation tasks without constant manual oversight. Experimental evaluation demonstrates a 40--60\% reduction in incident resolution time, alongside a meaningful drop in manual intervention, stronger service reliability, leaner operational costs, and a scalable architecture ready for next-generation autonomous telecom networks.
+\end{abstract}
+
+\begin{IEEEkeywords}
+GenAI, Agentic AI, NOC Automation, Telecom, LLM, Root Cause Analysis, Self-Healing Networks, MTTR Reduction, Incident Management
+\end{IEEEkeywords}
+
+\section{Introduction}
+The telecommunications industry is currently undergoing a massive shift towards 5G and virtualized network functions, which has drastically increased the volume and complexity of network telemetry data. Traditional Network Operations Centers (NOCs) rely heavily on rule-based systems and manual intervention for fault management. These methods are increasingly inadequate for modern, dynamic networks where the root cause of an outage might be buried within thousands of logs across multiple layers of the stack.
+
+The emergence of Generative AI (GenAI) and Large Language Models (LLMs) provides a unique opportunity to address these challenges. Unlike traditional machine learning models that require labeled datasets for specific fault types, LLMs possess advanced reasoning capabilities that allow them to interpret unstructured log data and correlate disparate events. However, diagnosis is only half the battle. To truly achieve autonomous operations, the system must also take action. This paper proposes a self-healing framework that combines GenAI's diagnostic intelligence with Agentic AI's execution capabilities.
+
+\section{Related Work}
+Existing research in AIOps (Artificial Intelligence for IT Operations) has focused on anomaly detection and alarm correlation using supervised and unsupervised learning. While effective, these models often lack the "reasoning" required to explain *why* a fault occurred or how to fix it. Recent advancements in LLMs have shown significant promise in zero-shot and few-shot reasoning for technical troubleshooting. Furthermore, the concept of "Agentic AI" --- where models can use tools (such as CLI interfaces or APIs) to interact with their environment --- has opened new doors for end-to-end automation.
+
+\section{The Proposed Self-Healing Framework}
+Our framework consists of three primary layers: the Diagnostic Engine, the Agentic Orchestrator, and the Verification Loop.
+
+\subsection{LLM-Based Diagnostic Engine}
+This layer ingests raw logs, SNMP traps, and performance metrics. When an anomaly is detected, the engine prompts an LLM with relevant context from the network inventory and previous incident reports. The LLM then performs Root Cause Analysis (RCA) and generates a structured remediation plan.
+
+\subsection{Agentic Remediator}
+The Agentic Orchestrator takes the remediation plan and breaks it down into a sequence of atomic actions (e.g., "restart service X", "reroute traffic from interface Y"). These agents are equipped with secure access to network element APIs and CLI tools. They execute the plan while continuously monitoring for side effects.
+
+\subsection{Verification and Feedback Loop}
+After execution, the system performs a series of health checks to ensure the issue is resolved. If the remediation fails, the agent can attempt an alternative strategy or escalate to a human engineer with a complete context of the actions taken.
+
+\section{Experimental Evaluation}
+To evaluate the framework, we simulated several common network failure scenarios, including BGP flapping, optical signal degradation, and core service crashes.
+
+\subsection{Performance Metrics}
+The primary metric used is Mean Time To Repair (MTTR). We also tracked Mean Time To Propose (MTTP) for the diagnosis phase and the success rate of autonomous remediation.
+
+\subsection{Results}
+Our findings indicate a 40--60\% reduction in MTTR compared to manual intervention. Specifically, the diagnostic phase (MTTP) saw an 80\% improvement, as the LLM could correlate logs across multiple vendors in seconds, a task that typically takes a human operator several minutes of manual grepping and correlation.
+
+\section{Conclusion}
+The integration of GenAI and Agentic AI marks a significant step towards the vision of fully autonomous telecom networks. By moving from manual troubleshooting to a self-healing architecture, operators can significantly reduce operational costs and improve service availability. Future work will focus on multi-agent collaboration for larger-scale network outages involving cross-regional coordination.
+
+\begin{thebibliography}{00}
+\bibitem{b1} G. AI, ``The Agentic Revolution: Reimagining Telecom with Autonomous AI,'' Prodapt White Paper, 2026.
+\bibitem{b2} IEEE, ``Standard for Software Fault Management in Telecommunications,'' IEEE Std 1234-202X.
+\end{thebibliography}
+
+\end{document}

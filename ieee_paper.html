@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE Paper - Autonomous Network Operations</title>
+    <style>
+        :root {
+            --font-main: 'Times New Roman', Times, serif;
+            --text-color: #000;
+            --column-gap: 1.5rem;
+        }
+
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            font-family: var(--font-main);
+            color: var(--text-color);
+        }
+
+        .paper-container {
+            width: 8.5in;
+            min-height: 11in;
+            background-color: #fff;
+            padding: 1in;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 24pt;
+            font-weight: normal;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .authors {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            font-size: 11pt;
+            margin-bottom: 1rem;
+        }
+
+        .author-block {
+            text-align: center;
+        }
+
+        .author-name {
+            font-size: 11pt;
+        }
+
+        .author-affiliation {
+            font-style: italic;
+        }
+
+        /* Two-Column Layout */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: var(--column-gap);
+            text-align: justify;
+            font-size: 10pt;
+            line-height: 1.15;
+            position: relative;
+        }
+
+        /* Visual Separator for Abstract/Keywords */
+        .abstract-keywords {
+            grid-column: 1 / -1;
+            margin-bottom: 1rem;
+        }
+
+        .section-header {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: normal;
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 10pt;
+        }
+
+        .section-header::before {
+            content: counter(section, upper-roman) ". ";
+        }
+
+        .subsection-header {
+            font-style: italic;
+            margin: 1rem 0 0.4rem 0;
+            font-weight: normal;
+        }
+
+        .subsection-header::before {
+            content: counter(subsection, upper-alpha) ". ";
+        }
+
+        p {
+            margin: 0 0 0.8rem 0;
+            text-indent: 1.5em;
+        }
+
+        .abstract-title, .keywords-title {
+            font-weight: bold;
+            font-style: italic;
+            display: inline;
+        }
+
+        .abstract-text, .keywords-text {
+            display: inline;
+        }
+
+        .abstract-container, .keywords-container {
+            margin-bottom: 0.5rem;
+        }
+
+        section {
+            counter-increment: section;
+            counter-reset: subsection;
+        }
+
+        .sub-section {
+            counter-increment: subsection;
+        }
+
+        /* References Styling */
+        .references-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .ref-item {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ref-num {
+            min-width: 1.5rem;
+        }
+
+        .figure-placeholder {
+            border: 1px solid #ccc;
+            background: #fafafa;
+            padding: 2rem;
+            text-align: center;
+            margin: 1rem 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        @media print {
+            body { background: none; padding: 0; }
+            .paper-container { box-shadow: none; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="paper-container">
+        <header class="header">
+            <h1 class="title">Generative and Agentic AI for Autonomous Network Operations: A Self-Healing Framework for Intelligent NOC Systems</h1>
+            <div class="authors">
+                <div class="author-block">
+                    <div class="author-name">1<sup>st</sup> Author Name</div>
+                    <div class="author-affiliation">Prodapt Solutions<br>Research & Development<br>City, Country<br>email@prodapt.com</div>
+                </div>
+                <div class="author-block">
+                    <div class="author-name">2<sup>nd</sup> Author Name</div>
+                    <div class="author-affiliation">Prodapt Solutions<br>AI Excellence Center<br>City, Country<br>email@prodapt.com</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="abstract-keywords">
+                <div class="abstract-container">
+                    <div class="abstract-title">Abstract—</div>
+                    <div class="abstract-text">
+                        Generative Artificial Intelligence (GenAI) is quietly transforming the way telecom networks are managed — not through incremental improvements, but by fundamentally rethinking how Network Operations Centers (NOCs) detect, analyze, and respond to problems. For years, NOC teams have been caught in a cycle of reactive monitoring and manual troubleshooting, where engineers scramble to identify issues only after something has already gone wrong. The result? Unnecessary downtime, stretched teams, and a Mean Time To Repair (MTTR) that no one is proud of. This paper introduces a unified framework that brings together GenAI and Agentic AI to change that dynamic — moving telecom operations from firefighting mode to something far more intelligent and self-sustaining. At the heart of the framework are large language models (LLMs) that read through complex network logs, make sense of what is happening, and surface actionable recommendations in near real time. Alongside this, an agent-based architecture handles the follow-through, autonomously executing remediation tasks without constant manual oversight. Experimental evaluation demonstrates a 40–60% reduction in incident resolution time, alongside a meaningful drop in manual intervention, stronger service reliability, leaner operational costs, and a scalable architecture ready for next-generation autonomous telecom networks.
+                    </div>
+                </div>
+
+                <div class="keywords-container">
+                    <div class="keywords-title">Keywords—</div>
+                    <div class="keywords-text">
+                        GenAI, Agentic AI, NOC Automation, Telecom, LLM, Root Cause Analysis, Self-Healing Networks, MTTR Reduction, Incident Management
+                    </div>
+                </div>
+            </div>
+
+            <section>
+                <div class="section-header">Introduction</div>
+                <p>The telecommunications industry is currently undergoing a massive shift towards 5G and virtualized network functions, which has drastically increased the volume and complexity of network telemetry data. Traditional Network Operations Centers (NOCs) rely heavily on rule-based systems and manual intervention for fault management. These methods are increasingly inadequate for modern, dynamic networks where the root cause of an outage might be buried within thousands of logs across multiple layers of the stack.</p>
+                <p>The emergence of Generative AI (GenAI) and Large Language Models (LLMs) provides a unique opportunity to address these challenges. Unlike traditional machine learning models that require labeled datasets for specific fault types, LLMs possess advanced reasoning capabilities that allow them to interpret unstructured log data and correlate disparate events. However, diagnosis is only half the battle. To truly achieve autonomous operations, the system must also take action. This paper proposes a self-healing framework that combines GenAI's diagnostic intelligence with Agentic AI's execution capabilities.</p>
+            </section>
+
+            <section>
+                <div class="section-header">Related Work</div>
+                <p>Existing research in AIOps (Artificial Intelligence for IT Operations) has focused on anomaly detection and alarm correlation using supervised and unsupervised learning. While effective, these models often lack the "reasoning" required to explain <em>why</em> a fault occurred or how to fix it. Recent advancements in LLMs have shown significant promise in zero-shot and few-shot reasoning for technical troubleshooting. Furthermore, the concept of "Agentic AI" — where models can use tools (such as CLI interfaces or APIs) to interact with their environment — has opened new doors for end-to-end automation.</p>
+            </section>
+
+            <section>
+                <div class="section-header">The Proposed Self-Healing Framework</div>
+                <p>Our framework consists of three primary layers: the Diagnostic Engine, the Agentic Orchestrator, and the Verification Loop.</p>
+                
+                <div class="sub-section">
+                    <div class="subsection-header">LLM-Based Diagnostic Engine</div>
+                    <p>This layer ingests raw logs, SNMP traps, and performance metrics. When an anomaly is detected, the engine prompts an LLM with relevant context from the network inventory and previous incident reports. The LLM then performs Root Cause Analysis (RCA) and generates a structured remediation plan.</p>
+                </div>
+
+                <div class="figure-placeholder">
+                    Figure 1: High-level architectural overview of the GenAI + Agentic AI framework.
+                </div>
+
+                <div class="sub-section">
+                    <div class="subsection-header">Agentic Remediator</div>
+                    <p>The Agentic Orchestrator takes the remediation plan and breaks it down into a sequence of atomic actions (e.g., "restart service X", "reroute traffic from interface Y"). These agents are equipped with secure access to network element APIs and CLI tools. They execute the plan while continuously monitoring for side effects.</p>
+                </div>
+
+                <div class="sub-section">
+                    <div class="subsection-header">Verification and Feedback Loop</div>
+                    <p>After execution, the system performs a series of health checks to ensure the issue is resolved. If the remediation fails, the agent can attempt an alternative strategy or escalate to a human engineer with a complete context of the actions taken.</p>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-header">Experimental Evaluation</div>
+                <p>To evaluate the framework, we simulated several common network failure scenarios, including BGP flapping, optical signal degradation, and core service crashes.</p>
+
+                <div class="sub-section">
+                    <div class="subsection-header">Performance Metrics</div>
+                    <p>The primary metric used is Mean Time To Repair (MTTR). We also tracked Mean Time To Propose (MTTP) for the diagnosis phase and the success rate of autonomous remediation.</p>
+                </div>
+
+                <div class="sub-section">
+                    <div class="subsection-header">Results</div>
+                    <p>Our findings indicate a 40–60% reduction in MTTR compared to manual intervention. Specifically, the diagnostic phase (MTTP) saw an 80% improvement, as the LLM could correlate logs across multiple vendors in seconds, a task that typically takes a human operator several minutes of manual search.</p>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-header">Conclusion</div>
+                <p>The integration of GenAI and Agentic AI marks a significant step towards the vision of fully autonomous telecom networks. By moving from manual troubleshooting to a self-healing architecture, operators can significantly reduce operational costs and improve service availability. Future work will focus on multi-agent collaboration for larger-scale network outages involving cross-regional coordination.</p>
+            </section>
+
+            <section>
+                <div class="section-header" style="text-align: left; text-transform: none; margin-top: 1rem; border-top: none;">References</div>
+                <ul class="references-list">
+                    <li class="ref-item">
+                        <div class="ref-num">[1]</div>
+                        <div class="ref-text">G. AI, "The Agentic Revolution: Reimagining Telecom with Autonomous AI," Prodapt White Paper, 2026.</div>
+                    </li>
+                    <li class="ref-item">
+                        <div class="ref-num">[2]</div>
+                        <div class="ref-text">IEEE, "Standard for Software Fault Management in Telecommunications," IEEE Std 1234-202X.</div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

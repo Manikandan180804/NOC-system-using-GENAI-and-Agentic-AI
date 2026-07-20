@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous NOC Command Center | GenAI + Agentic AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-layout" id="appLayout">
+        <!-- Primary Navigation Sidebar -->
+        <nav class="nav-sidebar" id="navSidebar">
+            <div class="sidebar-top">
+                <button class="toggle-sidebar-btn" onclick="toggleSidebar()" title="Toggle Sidebar">
+                    <span class="nav-icon">☰</span>
+                </button>
+                <div class="sidebar-brand">
+                    <span class="brand-spark">⚡</span>
+                    <span class="brand-name">AUTONOMOUS <strong>NOC</strong></span>
+                </div>
+            </div>
+
+            <div class="sidebar-menu">
+                <button class="nav-item active" onclick="setActiveNav('topology')" id="nav-topology">
+                    <span class="nav-icon">🌐</span>
+                    <span class="nav-text">Network Map</span>
+                </button>
+                <button class="nav-item" onclick="setActiveNav('controls')" id="nav-controls">
+                    <span class="nav-icon">🎯</span>
+                    <span class="nav-text">Fault Simulator</span>
+                </button>
+                <button class="nav-item" onclick="setActiveNav('agents')" id="nav-agents">
+                    <span class="nav-icon">🤖</span>
+                    <span class="nav-text">Agent Fleet</span>
+                </button>
+                <button class="nav-item" onclick="setActiveNav('logs')" id="nav-logs">
+                    <span class="nav-icon">🧠</span>
+                    <span class="nav-text">Reasoning Trace</span>
+                </button>
+            </div>
+
+            <div class="sidebar-bottom">
+                <div class="nav-item mode-item">
+                    <span class="nav-icon">🛡️</span>
+                    <div class="mode-toggle-group">
+                        <span class="nav-text">HITL Gate</span>
+                        <label class="switch">
+                            <input type="checkbox" id="hitlToggle" onchange="toggleHitlMode()">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Header Bar -->
+            <header class="app-header">
+                <div class="header-left">
+                    <span class="header-title" id="pageTitle">NETWORK TOPOLOGY COMMAND CENTER</span>
+                    <span class="badge-sub">IEEE GenAI Multi-Agent System v2</span>
+                </div>
+
+                <div class="header-right">
+                    <button class="view-toggle-btn active-toggle" onclick="togglePanel('left')" id="btnToggleLeft" title="Toggle Left Controls">
+                        🎯 Controls
+                    </button>
+                    <button class="view-toggle-btn active-toggle" onclick="togglePanel('right')" id="btnToggleRight" title="Toggle Right Logs">
+                        🧠 AI Logs
+                    </button>
+                    <div class="status-badge status-operational" id="systemStatusBadge">
+                        <span class="status-dot"></span>
+                        <span id="systemStatusText">SYSTEM OPERATIONAL</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dynamic Resizable Workspace Grid -->
+            <div class="workspace-grid" id="workspaceGrid">
+                <!-- Left Panel: Controls & Injector -->
+                <aside class="panel left-panel" id="leftPanel">
+                    <div class="nav-section" id="section-simulator">
+                        <div class="panel-card">
+                            <div class="card-title">🎯 FAULT SIMULATION ENGINE</div>
+                            <div class="scenario-list">
+                                <button class="scenario-btn" id="btn-traffic" onclick="runScenario('traffic')">
+                                    <div class="btn-head">
+                                        <span class="btn-icon">🔄</span>
+                                        <strong>Traffic Congestion</strong>
+                                    </div>
+                                    <span class="btn-sub">BGP Flapping & Route Reroute</span>
+                                </button>
+
+                                <button class="scenario-btn" id="btn-service" onclick="runScenario('service')">
+                                    <div class="btn-head">
+                                        <span class="btn-icon">⚡</span>
+                                        <strong>Service Saturation</strong>
+                                    </div>
+                                    <span class="btn-sub">VNF Autoscaling & Load Balance</span>
+                                </button>
+
+                                <button class="scenario-btn" id="btn-security" onclick="runScenario('security')">
+                                    <div class="btn-head">
+                                        <span class="btn-icon">🛡️</span>
+                                        <strong>Security Anomaly</strong>
+                                    </div>
+                                    <span class="btn-sub">UDP DDoS Threat Scrubbing</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="panel-card" style="margin-top: 12px;">
+                            <div class="card-title">✨ GENAI INCIDENT INJECTOR</div>
+                            <div class="prompt-box">
+                                <textarea id="customPrompt" placeholder="Describe network anomaly (e.g., 'Packet drop spike on EDGE-1 link')..." rows="2"></textarea>
+                                <button class="btn-execute" onclick="injectCustomPrompt()">Execute GenAI Agent</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-section" id="section-agents">
+                        <div class="panel-card fleet-card">
+                            <div class="card-title">🤖 AGENT FLEET MONITOR</div>
+                            <div class="agent-grid" id="agentList">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Left Drag Handle Resizer -->
+                <div class="panel-resizer" id="resizer-left" title="Drag to resize panel"></div>
+
+                <!-- Center Panel: Topology Map -->
+                <main class="panel center-panel" id="centerPanel">
+                    <div class="topology-header">
+                        <div class="topo-title-group">
+                            <span class="topo-icon">🌐</span>
+                            <h2>TOPOLOGY MAP</h2>
+                            <span class="topo-hint">(Click node for live diagnostics)</span>
+                        </div>
+                        <div class="topo-legend">
+                            <span class="legend-chip"><span class="chip-dot normal"></span> Operational</span>
+                            <span class="legend-chip"><span class="chip-dot warning"></span> Degraded</span>
+                            <span class="legend-chip"><span class="chip-dot fault"></span> Critical</span>
+                        </div>
+                    </div>
+
+                    <div class="topology-viewport" id="topology">
+                        <svg id="topologySvg" class="topology-svg"></svg>
+                        <div id="nodesContainer" class="nodes-container"></div>
+                    </div>
+
+                    <!-- HITL Overlay -->
+                    <div id="hitlApprovalOverlay" class="hitl-overlay hidden">
+                        <div class="hitl-modal-box">
+                            <div class="hitl-modal-header">
+                                <span>⚠️</span>
+                                <h3>HUMAN APPROVAL REQUIRED</h3>
+                            </div>
+                            <p id="hitlActionMsg" class="hitl-modal-msg">Agent TrafficAgent requests permission to shift BGP routes on CORE-A.</p>
+                            <div class="hitl-modal-meta">
+                                <div>Target Node: <strong id="hitlTargetNode">CORE-A</strong></div>
+                                <div>Risk Level: <strong style="color: var(--accent-amber);">MEDIUM</strong></div>
+                            </div>
+                            <div class="hitl-modal-actions">
+                                <button class="btn-hitl-approve" onclick="resolveHitl(true)">Approve & Execute</button>
+                                <button class="btn-hitl-reject" onclick="resolveHitl(false)">Reject Action</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Right Drag Handle Resizer -->
+                <div class="panel-resizer" id="resizer-right" title="Drag to resize panel"></div>
+
+                <!-- Right Panel: AI Reasoning Stream -->
+                <aside class="panel right-panel" id="rightPanel">
+                    <div class="panel-card log-card-container">
+                        <div class="log-header">
+                            <div class="log-title-row">
+                                <span class="log-icon">🧠</span>
+                                <h2>AI REASONING TRACE</h2>
+                                <button class="btn-export" onclick="exportIncidentReport()" id="btnExport" disabled>
+                                    📥 Export
+                                </button>
+                            </div>
+                            <div class="filter-chips">
+                                <button class="filter-chip active" onclick="filterLogs('ALL')">All</button>
+                                <button class="filter-chip" onclick="filterLogs('ALERT')">Alerts</button>
+                                <button class="filter-chip" onclick="filterLogs('DIAGNOSIS')">Diagnosis</button>
+                                <button class="filter-chip" onclick="filterLogs('ACTION')">Actions</button>
+                            </div>
+                        </div>
+
+                        <div class="log-viewport" id="thoughtLog">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Footer Metrics -->
+            <footer class="app-footer">
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <span class="m-title">MTTR (AVG)</span>
+                        <span class="m-value" id="mttrValue">3.8m</span>
+                        <span class="m-trend trend-good">▼ 18% vs Manual</span>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <span class="m-title">NETWORK RELIABILITY</span>
+                        <span class="m-value" id="reliabilityValue">99.995%</span>
+                        <span class="m-trend trend-good">▲ 0.05% SLA</span>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <span class="m-title">AUTONOMOUS RESOLUTIONS</span>
+                        <span class="m-value" id="autoResCount">142</span>
+                        <span class="m-trend">Last 24h</span>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <span class="m-title">OPEX SAVINGS</span>
+                        <span class="m-value" id="savingsValue">$14.8k</span>
+                        <span class="m-trend trend-good">▲ Month-to-date</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="nodeModal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span id="modalNodeIcon">🌐</span>
+                    <h3 id="modalNodeTitle">NODE TELEMETRY</h3>
+                </div>
+                <button class="btn-close" onclick="closeNodeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="telemetry-grid">
+                    <div class="t-stat">
+                        <span class="t-label">CPU Load</span>
+                        <div class="bar-bg"><div class="bar-fill" id="modalCpuBar"></div></div>
+                        <span class="t-val" id="modalCpuVal">25%</span>
+                    </div>
+                    <div class="t-stat">
+                        <span class="t-label">Memory</span>
+                        <div class="bar-bg"><div class="bar-fill" id="modalMemBar"></div></div>
+                        <span class="t-val" id="modalMemVal">42%</span>
+                    </div>
+                    <div class="t-stat">
+                        <span class="t-label">Latency</span>
+                        <span class="t-val" id="modalLatencyVal">2.4 ms</span>
+                    </div>
+                    <div class="t-stat">
+                        <span class="t-label">Packet Drop</span>
+                        <span class="t-val" id="modalPacketDropVal">0.00%</span>
+                    </div>
+                </div>
+
+                <div class="section-label">ACTIVE INTERFACES</div>
+                <div class="intf-list" id="modalInterfaces"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-diag" onclick="triggerNodeDiagnostic()">Run Diagnostic Sweep</button>
+                <button class="btn-cancel" onclick="closeNodeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="reportModal" class="modal-backdrop hidden">
+        <div class="modal-card report-card">
+            <div class="modal-header">
+                <h3>📄 INCIDENT POST-MORTEM REPORT</h3>
+                <button class="btn-close" onclick="closeReportModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <pre class="report-view" id="reportText"></pre>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-diag" onclick="downloadReport()">📥 Download JSON</button>
+                <button class="btn-cancel" onclick="closeReportModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
