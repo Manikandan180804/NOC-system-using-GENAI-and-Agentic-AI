@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: autonomous-noc-command-center
+    env: static
+    buildCommand: ""
+    staticPublishPath: .

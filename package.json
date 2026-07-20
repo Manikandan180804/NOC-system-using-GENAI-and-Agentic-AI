@@ -1,0 +1,9 @@
+{
+  "name": "autonomous-noc-command-center",
+  "version": "1.0.0",
+  "description": "Autonomous NOC Command Center - GenAI + Multi-Agent AI System",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -s ."
+  }
+}
